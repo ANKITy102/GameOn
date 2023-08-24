@@ -1,10 +1,12 @@
 import { FC } from "react";
-import heroClassNames from "./heroClassNames";
 import Link from "next/link";
 import Image from "next/image";
 
+import heroClassNames from "./heroClassNames";
+
 const HeroSection: FC<{ showLink?: boolean }> = (props) => {
   const { showLink } = props;
+
   return (
     <section className={heroClassNames.hero}>
       <div className={heroClassNames.grid}>
@@ -14,7 +16,7 @@ const HeroSection: FC<{ showLink?: boolean }> = (props) => {
             Unlock Your Gaming Potential
           </h1>
           <p className={heroClassNames.paragraph}>
-            Discover, Learn, and Conquer with our Extensive Collection of Games
+            Discover, Learn, and Conquer with Our Extensive Collection of Games
           </p>
           {showLink && (
             <div className="mt-8 sm:mt-10 rounded">
@@ -24,17 +26,17 @@ const HeroSection: FC<{ showLink?: boolean }> = (props) => {
             </div>
           )}
         </div>
-      </div>
-      <div className={heroClassNames.imageContainer}>
-        <Image
-          alt="3D Game Development"
-          width="400"
-          height={400}
-          src="https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1175&q=80"
-          style={{
-            objectFit: "contain",
-          }}
-        />
+
+        <div className={heroClassNames.imageContainer}>
+          <Image
+            src="https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1175&q=80"
+            alt="3D Game Development"
+            className={heroClassNames.image}
+            width="400"
+            height={400}
+            style={{ objectFit: "contain" }}
+          />
+        </div>
       </div>
     </section>
   );
