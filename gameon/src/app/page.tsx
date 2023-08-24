@@ -1,29 +1,37 @@
-import GameCard from '@/components/GameCard/GameCard';
-import HeroSection from '@/components/HeroSection/HeroSection'
-import Image from 'next/image'
-import Link from 'next/link';
+import GameCard from "@/components/GameCard/GameCard";
+import GameCategoryCard from "@/components/GameCategoryCard/GameCategoryCard";
+import HeroSection from "@/components/HeroSection/HeroSection";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-    <HeroSection/>
+      <HeroSection showLink />
 
-    <section className={sectionClassNames.section}>
-      <div className={sectionClassNames.trending}>
-        <h2 className={sectionClassNames.trendingTitle}>
-          Currently Trending Games
-        </h2>
-      </div>
-      <div className="flex gap-8 flex-wrap">
-          {games.map(game=> <GameCard
-          key={game.id}
-          gameName={game.name}
-          imageUrl={game.image}
-          slug={game.slug}
-          price={game.price}
-          /> )}
-      </div>
-    </section>
+      <section className={sectionClassNames.section}>
+        <div className={sectionClassNames.trending}>
+          <h2 className={sectionClassNames.trendingTitle}>
+            Currently Trending Games
+          </h2>
+        </div>
+        <div className="flex gap-8 flex-wrap">
+          {games.map((game) => (
+            <GameCard
+              key={game.id}
+              gameName={game.name}
+              imageUrl={game.image}
+              slug={game.slug}
+              price={game.price}
+            />
+          ))}
+        </div>
+      </section>
+
+      <h3 className="font-semibold text-2xl max-w-3xl text-center mx-auto text-primary-dark pt-12 sm:pt-28 pb-8 sm:pb-16 leading-[125%] sm:leading-[187%]">
+        Featured Game
+      </h3>
+
       <section className={sectionClassNames.featured}>
         <div className={sectionClassNames.featuredContent}>
           <h2 className={featuredClassNames.gameName}>{featuredGame.name} </h2>
@@ -31,14 +39,47 @@ export default function Home() {
             {featuredGame.description}
           </p>
           <Link href={`/games/${featuredGame.slug}`}>
-            
+            <Image
+              src={featuredGame.image}
+              alt={featuredGame.name}
+              width={500}
+              height={500}
+              className={featuredClassNames.gameImage}
+            />
           </Link>
         </div>
       </section>
-    </>
-  )
-}
 
+      <section
+      style={{
+        backgroundImage:
+        "url('https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGxheSUyMHN0YXRpb258ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
+      }}
+      className={styles.categorySection}
+      >
+          <div className={styles.categoryContent}>
+          <h2 className={styles.categoryHeading}>Categories</h2>
+          <p className={styles.categorySubHeading}>
+            Explore a wide range of games, offering thrilling adventures,
+            challenging sports, and immersive action gameplay. Discover new
+            worlds, compete with friends, and embark on epic quests that will
+            keep you entertained for hours.
+          </p>
+          <div className="flex flex-wrap">
+            {categories.map((category) => (
+              <GameCategoryCard
+                key={category.id}
+                categoryImage={category.image}
+                categoryName={category.name}
+                slug={category.slug}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
 
 const sectionClassNames = {
   section: "px-6 sm:px-12 md:px-20 lg:px-36 mx-auto py-8 text-white",
@@ -51,7 +92,6 @@ const sectionClassNames = {
   featured: "pb-24 px-6 sm:px-12 md:px-20 lg:px-36 text-white",
   featuredContent: "mx-auto max-w-screen-xl",
 };
-
 
 const games = [
   {
@@ -101,3 +141,39 @@ const featuredGame = {
   slug: "eternal-domination",
   image: "/images/trending.jpeg",
 };
+
+
+const styles = {
+  categorySection:
+    "bg-center bg-cover bg-no-repeat py-16 sm:py-20 md:py-28 lg:py-32",
+  categoryContent: "container mx-auto px-4 sm:px-6 md:px-8",
+  categoryHeading:
+    "text-center max-w-md sm:max-w-lg md:max-w-2xl mx-auto text-primary font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 leading-[130%,187%,130%,130%]",
+  categorySubHeading:
+    "text-center bg-primary-gradient px-8 rounded-3xl py-5 max-w-md sm:max-w-lg md:max-w-2xl mx-auto text-white text-base sm:text-lg md:text-xl lg:text-2xl mb-8",
+};
+
+
+const categories = [
+  {
+    id: 1,
+    name: "Action",
+    slug: "action",
+    image:
+      "https://images.unsplash.com/photo-1552072092-7f9b8d63efcb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlnaHR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    id: 2,
+    name: "Adventure",
+    slug: "adventure",
+    image:
+      "https://images.unsplash.com/photo-1536751048178-14106afab4f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cmFjaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    id: 3,
+    name: "Sports",
+    slug: "sports",
+    image:
+      "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3BvcnRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+  },
+];

@@ -1,6 +1,6 @@
 const gameCardClassNames = {
     container: "relative mx-auto w-[251px] h-[277px] rounded-2xl overflow-hidden",
-    image: "w-full h-full object-cover",
+    image: "w-full hover:scale-125 transition-all h-full transition-all duration-500 object-cover",
     price:
       "absolute rounded-bl-2xl top-0 right-0 bg-primary p-3 text-lg font-semibold z-10",
     gameName:
