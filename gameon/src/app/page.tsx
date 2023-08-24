@@ -1,6 +1,7 @@
 import GameCard from "@/components/GameCard/GameCard";
 import GameCategoryCard from "@/components/GameCategoryCard/GameCategoryCard";
 import HeroSection from "@/components/HeroSection/HeroSection";
+import NewsLetter from "@/components/NewsLetter/NewsLetter";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -100,6 +101,8 @@ export default function Home() {
           See All
         </Link>
       </section>
+
+      <NewsLetter/>
     </>
   );
 }
