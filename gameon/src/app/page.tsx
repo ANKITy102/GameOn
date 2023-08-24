@@ -77,6 +77,29 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section id="recent-games" className={recentGamesClasses.section}>
+        <h2 className={recentGamesClasses.heading}>Our Recent Games</h2>
+        <p className={recentGamesClasses.subHeading}>
+          Stay Ahead of the Gaming Curve with Our Latest Games.
+        </p>
+
+        <div className="flex rounded gap-8 flex-wrap py-10">
+          {games.map((game) => (
+            <GameCard
+              key={game.id}
+              gameName={game.name}
+              imageUrl={game.image}
+              price={game.price}
+              slug={game.slug}
+            />
+          ))}
+        </div>
+
+        <Link href="games" className={sectionClassNames.latestButton}>
+          See All
+        </Link>
+      </section>
     </>
   );
 }
@@ -177,3 +200,9 @@ const categories = [
       "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3BvcnRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
   },
 ];
+
+const recentGamesClasses = {
+  section: "py-16 lg:py-36 px-4 lg:px-36 text-white text-center",
+  heading: "text-3xl lg:text-4xl font-bold mb-3",
+  subHeading: "text-gray-400 max-w-xl mx-auto lg:text-lg",
+};
