@@ -205,6 +205,7 @@ const categories = [
 ];
 
 const recentGamesClasses = {
+  
   section: "py-16 lg:py-36 px-4 lg:px-36 text-white text-center",
   heading: "text-3xl lg:text-4xl font-bold mb-3",
   subHeading: "text-gray-400 max-w-xl mx-auto lg:text-lg",
