@@ -86,3 +86,33 @@ export const getRecentGame = async (): Promise<Game[]> => {
       return games
     
     } 
+
+
+    export const getGame = async (slug:string): Promise<Game> => {
+      const query = `*[_type == "game" && slug.current=="${slug}"][0] {
+            _id,
+            name,
+            price,
+            image,
+            isFeatured,
+            isTrending,
+            'category': *[_id == ^.category._ref][0] {
+              name,
+              slug {
+                current
+              }
+            },
+            slug,
+            quantity,
+            description
+          }`;
+    
+      const games: Game = await sanityClient.fetch({ query });
+          // console.log(games)
+      return games;
+    };
+
+
+
+    
+   
