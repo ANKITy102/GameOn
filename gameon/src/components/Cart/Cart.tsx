@@ -1,11 +1,22 @@
 "use client"
 import { useAppDispatch, useAppSelector } from "@/hooks/storeHook";
-import { toggleCart } from "@/redux/features/cartSlice";
-import { FC } from "react";
+import { removeItemFromCart, toggleCart } from "@/redux/features/cartSlice";
+import Image from "next/image";
+import { FC, useEffect, useState } from "react";
+import {RiCloseLine} from "react-icons/ri"
 
 const Cart: FC = () => {
-    const {cart: {showCart,cartItems}} = useAppSelector((state)=>state)
+    const {showCart,cartItems} = useAppSelector((state)=>state.cart)
+    const [renderComponent, setRenderComponent] = useState(false);
+
     const dispatch = useAppDispatch();
+
+    const handleRemoveItem = (id:string) => dispatch(removeItemFromCart({_id:id}));
+
+     useEffect(()=>{
+        setRenderComponent(true);
+     },[])   
+     if(!renderComponent) return <></>
   return (
     <div
 			className={`${classNames.container} ${
@@ -22,10 +33,42 @@ const Cart: FC = () => {
         {cartItems && cartItems.length>0 ?
             cartItems.map(item=> <div key={item._id} className={cartItemClassNames.container}>
                 {/* Cart Content */}
-
+                <Image
+                    width={100}
+                    height={100}
+                    src={item.image[0].url}
+                    alt={item.name}
+                    className={cartItemClassNames.image}
+                />
+                <div className={cartItemClassNames.details}>
+                    <h3 className={cartItemClassNames.name}>
+                        {item.name}
+                    </h3>
+                    <p className={cartItemClassNames.price}>
+                        $ {item.price.toFixed(2)}
+                    </p>
+                </div>
+                <div className={cartItemClassNames.quantityContainer}>
+                    <span className={cartItemClassNames.quantity}>
+                        2
+                    </span>
+                    <button onClick={()=>handleRemoveItem(item._id)} className={cartItemClassNames.removeButton}>
+                        <RiCloseLine/>
+                    </button>
+                </div>
             </div> )
         : <p>Your Cart is Empty</p> }
       </div>
+
+      <div className={classNames.subtotalContainer}>
+        <span className={classNames.subtotalText}>SubTotal</span>
+        <span className={classNames.subtotalPrice}>
+            999
+        </span>
+      </div>
+      <button className={classNames.checkoutBtn}>
+        Checkout
+      </button>
     </div>
   )
 }

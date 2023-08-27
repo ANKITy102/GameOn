@@ -1,75 +1,96 @@
-"use client"
+"use client";
 import CarouselSlider from "@/components/CarouselSlider/CarouselSlider";
+import { useAppDispatch } from "@/hooks/storeHook";
 import { getGame } from "@/libs/apis";
 import { Game } from "@/models/game";
-import {useState, useEffect} from "react";
+import { addItemToCart } from "@/redux/features/cartSlice";
+import { useState, useEffect } from "react";
 // import GameDetailsClient from "@/components/GameDetails/GameDetailsClient";
 // import GameDetailsServer from "@/components/GameDetails/GameDetailsServer";
-import {FaShoppingCart} from "react-icons/fa";
-const GameDetailsClient =  (props: {   slug: string  , children: React.ReactNode}) => {
-  const {
-    slug ,children
-  } = props;
+import { FaShoppingCart } from "react-icons/fa";
+const GameDetailsClient = (props: {
+  slug: string;
+  children: React.ReactNode;
+}) => {
+  const { slug, children } = props;
   // console.log(props);
 
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
-  const [gameDetails,setGameDetails]=useState<Game>();
+  const [gameDetails, setGameDetails] = useState<Game>();
+  const dispatch = useAppDispatch();
   // const gameDetails = await getGame(slug);
-  useEffect(()=>{
-    const fetchGameDetails = async () =>{
+  useEffect(() => {
+    const fetchGameDetails = async () => {
       const game = await getGame(slug);
       setGameDetails(game);
-    }
-    fetchGameDetails()
-  },[slug])
+    };
+    fetchGameDetails();
+  }, [slug]);
 
-  const handleDecrease = () =>{
-    if(!gameDetails) return 
-    if(quantity>0){
-      console.log(quantity)
-      setQuantity(quantity-1);
-      setPrice(Number(((quantity-1)*gameDetails.price).toFixed(2)))
+  const handleDecrease = () => {
+    if (!gameDetails) return;
+    if (quantity > 0) {
+      console.log(quantity);
+      setQuantity(quantity - 1);
+      setPrice(Number(((quantity - 1) * gameDetails.price).toFixed(2)));
     }
-  }
-  const handleIncrease = () =>{
-    if(!gameDetails) return;
-    if(quantity<gameDetails.quantity){
-      console.log(quantity, gameDetails.quantity)
-      setQuantity(quantity+1);
+  };
+  const handleIncrease = () => {
+    if (!gameDetails) return;
+    if (quantity < gameDetails.quantity) {
+      console.log(quantity, gameDetails.quantity);
+      setQuantity(quantity + 1);
       // setQuantity(5)
-      setPrice(Number(((quantity+1)*gameDetails.price).toFixed(2)))
+      setPrice(Number(((quantity + 1) * gameDetails.price).toFixed(2)));
     }
+  };
+
+  const handleAddToCart = () =>{
+    if(!gameDetails) return;
+    dispatch(addItemToCart({...gameDetails, quantity}));
   }
+
   return (
     <div className="">
-      {gameDetails && <CarouselSlider images= {gameDetails.image}/>}
+      {gameDetails && <CarouselSlider images={gameDetails.image} />}
       <div className={classNames.container}>
         <div className={classNames.productInfo}>
           <div className={classNames.cartContainer}>
             <button
-              className={`${classNames.button} ${quantity===0 && classNames.disabledButton}`}
-              disabled={quantity===0}
+              className={`${classNames.button} ${
+                quantity === 0 && classNames.disabledButton
+              }`}
+              disabled={quantity === 0}
               onClick={handleDecrease}
             >
               -
             </button>
-            <input type="text"
+            <input
+              type="text"
               className={classNames.quantityInput}
               value={quantity}
               readOnly
             />
-           {gameDetails && <button
-            className=  {`${classNames.button} ${quantity===gameDetails.quantity && classNames.disabledButton}`}
-            onClick={handleIncrease} 
-            disabled={quantity===gameDetails.quantity}
-            >
-              +
-              </button>}
+            {gameDetails && (
+              <button
+                className={`${classNames.button} ${
+                  quantity === gameDetails.quantity && classNames.disabledButton
+                }`}
+                onClick={handleIncrease}
+                disabled={quantity === gameDetails.quantity}
+              >
+                +
+              </button>
+            )}
             <div className={`${classNames.cartPrice}`}> $ {price} </div>
-            <button className={`${classNames.button} ${quantity===0 && classNames.disabledButton}`}> 
-            
-            <FaShoppingCart/>
+            <button
+            onClick={handleAddToCart}
+              className={`${classNames.button} ${
+                quantity === 0 && classNames.disabledButton
+              }`}
+            >
+              <FaShoppingCart />
             </button>
           </div>
 
@@ -82,7 +103,6 @@ const GameDetailsClient =  (props: {   slug: string  , children: React.ReactNode
 };
 
 export default GameDetailsClient;
-
 
 const classNames = {
   container:
@@ -104,4 +124,3 @@ const classNames = {
   button: "px-4 py-2 rounded bg-blue-500 text-white",
   disabledButton: "bg-gray-300 cursor-not-allowed",
 };
-

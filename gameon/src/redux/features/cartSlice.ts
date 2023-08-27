@@ -13,7 +13,7 @@ const cartFromLocalStorage =
     : [];
 
 const initialState: CartState = {
-  showCart: false,
+  showCart: true,
   cartItems: cartFromLocalStorage,
 };
 
