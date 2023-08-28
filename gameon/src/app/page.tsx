@@ -10,6 +10,7 @@ export default async function Home() {
   const categories = await getCategories();
   // console.log(categories)
   const games = await getGames();
+  // console.log(games[0].image[0].url)
   const isTrendingGames = games?.filter((game)=> game.isTrending);
   const isFeaturedGame = games?.find((game)=> game.isFeatured);
   const recentGames= await getRecentGame()
