@@ -35,7 +35,7 @@ export const getGames = async (): Promise<Game[]> => {
 
 	const games: Game[] = await sanityClient.fetch({ query });
   console.log("------------------")
-      console.log(games)
+
 	return games;
 };
 

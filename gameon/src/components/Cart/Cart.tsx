@@ -1,5 +1,6 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/hooks/storeHook";
+import useCartTotals from "@/hooks/useCartTotals";
 import { removeItemFromCart, toggleCart } from "@/redux/features/cartSlice";
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
@@ -8,7 +9,7 @@ import { RiCloseLine } from "react-icons/ri";
 const Cart: FC = () => {
   const { showCart, cartItems } = useAppSelector((state) => state.cart);
   const [renderComponent, setRenderComponent] = useState(false);
-
+  const {totalPrice} = useCartTotals();
   const dispatch = useAppDispatch();
 
   const handleRemoveItem = (id: string) =>
@@ -17,22 +18,8 @@ const Cart: FC = () => {
   useEffect(() => {
     setRenderComponent(true);
   }, []);
-  const calculateCartTotals = (): {
-    totalPrice: number;
-    totalQuantity: number;
-  } => {
-    let totalPrice = 0;
-    let totalQuantity = 0;
 
-    cartItems.forEach((item)=>{
-      totalPrice += (item.price * item.quantity);
 
-    })
-
-    return { totalPrice, totalQuantity };
-  };
-
-  const {totalPrice, totalQuantity} = calculateCartTotals();
 
   if (!renderComponent) return <></>;
   return (
