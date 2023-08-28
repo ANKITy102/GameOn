@@ -1,11 +1,13 @@
 "use client"
 import Link from "next/link";
+import {useState} from "react";
 import headerClassNames from "./headerClassNames";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useAppDispatch, useAppSelector } from "@/hooks/storeHook";
 import { toggleCart } from "@/redux/features/cartSlice";
 import useCartTotals from "@/hooks/useCartTotals";
+import Signup from "../Signup/Signup";
 const Header = () => {
   const {
     header,
@@ -23,10 +25,17 @@ const Header = () => {
     logoutBtn,
     cart,
   } = headerClassNames;
-
+  const [isSignupFormOpen, setIsSignupForm] = useState(false);
   const dispatch = useAppDispatch();
   const {totalQuantity} = useCartTotals();
+
+  const toggleForm =() =>{
+    setIsSignupForm((prev)=>!prev)
+  }
+
   return (
+    <>
+    <Signup isSignupFormOpen={isSignupFormOpen} toggleForm={toggleForm} />
     <div className={header}>
         <div className={container}>
 
@@ -50,7 +59,7 @@ const Header = () => {
             <button className={logoutBtn}>
               Logout
             </button>
-            <button className={signupBtn}>Sign Up</button>
+            <button className={signupBtn} onClick={toggleForm} >Sign Up</button>
             <button className={signinBtn}>
               Sign In
               <FcGoogle
@@ -67,6 +76,7 @@ const Header = () => {
       </nav>
         </div>
     </div>
+    </>
   );
 };
 export default Header;
