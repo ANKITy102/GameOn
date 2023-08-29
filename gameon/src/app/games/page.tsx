@@ -5,7 +5,7 @@ import { getGames } from "@/libs/apis";
 
 const Games = async (props: {}) => {
   const games = await getGames();
-  console.log(games)
+  // console.log(games)
   return (
     <div>
       <HeroSection />

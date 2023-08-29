@@ -5,6 +5,7 @@ import { Montserrat, Poppins } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
 import { Providers } from "@/redux/Providers";
 import Cart from "@/components/Cart/Cart";
+import Toast from "@/components/Toast/Toast";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${poppins.variable} ${montserrat.variable}`}>
       <body>
+        <Toast/>
         <Providers>
           <Cart/>
           <Header />
