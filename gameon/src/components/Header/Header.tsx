@@ -8,6 +8,8 @@ import { useAppDispatch, useAppSelector } from "@/hooks/storeHook";
 import { toggleCart } from "@/redux/features/cartSlice";
 import useCartTotals from "@/hooks/useCartTotals";
 import Signup from "../Signup/Signup";
+import headerlogo from "../../../public/images/GameonLogo.png"
+import Image from "next/image";
 const Header = () => {
   const {
     header,
@@ -40,7 +42,13 @@ const Header = () => {
         <div className={container}>
 
       <Link href="/" className={logoContainer}>
-        <h1 className={logo}>Logo</h1>
+        <h1 className={logo}>
+          <Image
+           src={headerlogo}
+           alt="Logo"
+           fill
+          />
+        </h1>
       </Link>
       <nav className={nav}>
         <ul className={ul}>
