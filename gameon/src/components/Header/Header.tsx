@@ -8,8 +8,9 @@ import { useAppDispatch, useAppSelector } from "@/hooks/storeHook";
 import { toggleCart } from "@/redux/features/cartSlice";
 import useCartTotals from "@/hooks/useCartTotals";
 import Signup from "../Signup/Signup";
-import headerlogo from "../../../public/images/GameonLogo.png"
+import headerlogo from "../../../public/images/GameOnLogo2.png"
 import Image from "next/image";
+import { signIn, useSession, signOut } from 'next-auth/react';
 const Header = () => {
   const {
     header,
@@ -34,7 +35,13 @@ const Header = () => {
   const toggleForm =() =>{
     setIsSignupForm((prev)=>!prev)
   }
-
+  const signinHandler = async () => {
+		try {
+			await signIn();
+		} catch (error) {
+			console.log('SIGN IN ERROR', error);
+		}
+	};
   return (
     <>
     <Signup isSignupFormOpen={isSignupFormOpen} toggleForm={toggleForm} />
@@ -42,11 +49,13 @@ const Header = () => {
         <div className={container}>
 
       <Link href="/" className={logoContainer}>
-        <h1 className={logo}>
+        <h1 className={` ${logo}`}>
           <Image
            src={headerlogo}
            alt="Logo"
-           fill
+           height={45}
+          
+        
           />
         </h1>
       </Link>
@@ -68,7 +77,9 @@ const Header = () => {
               Logout
             </button>
             <button className={signupBtn} onClick={toggleForm} >Sign Up</button>
-            <button className={signinBtn}>
+            <button className={signinBtn}
+              onClick={signinHandler}
+            >
               Sign In
               <FcGoogle
                 style={{
