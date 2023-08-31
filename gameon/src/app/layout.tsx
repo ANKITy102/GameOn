@@ -21,7 +21,7 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
 });
 export const metadata: Metadata = {
-  title: "NextJs Ecommerce",
+  title: "GameOn",
   description: "This is a shop where we sell online games",
 };
 

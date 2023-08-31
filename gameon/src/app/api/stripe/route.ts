@@ -33,7 +33,7 @@ export async function POST(req: Request, res: Response) {
 					minimum: 1,
 				},
 				price_data: {
-					currency: 'usd',
+					currency: 'usd' || 'inr',
 					product_data: {
 						name: item.name,
 						images: [item.image[0].url],
