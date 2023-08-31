@@ -27,6 +27,7 @@ const Header = () => {
     signinBtn,
     logoutBtn,
     cart,
+    link2
   } = headerClassNames;
   const [isSignupFormOpen, setIsSignupForm] = useState(false);
   const dispatch = useAppDispatch();
@@ -69,14 +70,17 @@ const Header = () => {
       <nav className={nav}>
         <ul className={ul}>
           <li>
-            <button onClick={()=>dispatch(toggleCart())} className={link}>
+            <button onClick={()=>dispatch(toggleCart())} className={link2}>
               <span>
-                Cart <AiOutlineShoppingCart className="inline-block text-3xl" />
+                <span className="md:block hidden">
+                Cart
+                </span>
+                 <AiOutlineShoppingCart className="inline-block text-3xl" />
               </span>
               <div className={cart}>{totalQuantity}</div>
             </button>
           </li>
-          <li className="flex items-center justify-center h-7 ">
+          <li className="flex md:flex-row  items-center justify-center h-7 ">
           {session?.user && (
 									<>
 										<Link href='/orders' className={orders}>
@@ -87,19 +91,17 @@ const Header = () => {
 										</button>
 									</>
 								)}
+                {/* <div className="ml-3"></div> */}
 								{!session?.user && (
 									<>
 										<button onClick={toggleForm} className={signupBtn}>
 											Sign Up
 										</button>
-										<button onClick={signinHandler} className={signinBtn}>
+										<button onClick={signinHandler} className={` ${signinBtn}`}>
 											Sign In
 											<FcGoogle
-												style={{
-													fontSize: '25px',
-													cursor: 'pointer',
-													marginLeft: '12px',
-												}}
+												
+												
 												className={link}
 											/>
 										</button>

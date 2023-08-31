@@ -1,5 +1,5 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Header from "@/components/Header/Header";
 import { Montserrat, Poppins } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
@@ -8,6 +8,10 @@ import Cart from "@/components/Cart/Cart";
 import Toast from "@/components/Toast/Toast";
 import { NextAuthProvider } from "@/components/AuthProvider/AuthProvider";
 
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
@@ -21,9 +25,22 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
 });
 export const metadata: Metadata = {
-  title: "GameOn",
-  description: "This is a shop where we sell online games",
+  title: "GameOn - Welcome to GameOn. Try our latest games.",
+  description: "GameOn is platform where you can purchase your favourite video games.",
+  metadataBase: new URL('https://gameon-ten.vercel.app/'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+      'de-DE': '/de-DE',
+    },
+  },
+  openGraph: {
+    images: '../../public/images/mainpage.png',
+  },
 };
+
+
 
 export default function RootLayout({
   children,
