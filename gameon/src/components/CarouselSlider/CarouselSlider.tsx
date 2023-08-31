@@ -8,7 +8,7 @@ interface CarouselSliderProps {
   images: { _key: string; url: string }[];
   interval?: number;
 }
-
+ 
 const CarouselSlider: FC<CarouselSliderProps> = (props) => {
   const { images, interval = 3000 } = props;
 
