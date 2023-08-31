@@ -5,7 +5,7 @@ import GameDetailsServer from "@/components/GameDetails/GameDetailsServer";
 // import GameDetailsClient from "@/components/GameDetails/GameDetailsClient";
 // import GameDetailsServer from "@/components/GameDetails/GameDetailsServer";
 import {FaShoppingCart} from "react-icons/fa";
-const GameItem = async (props: { params: { slug: string } }) => {
+const GameItem =  (props: { params: { slug: string } }) => {
   const {
     params: { slug },
   } = props;
