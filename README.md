@@ -8,7 +8,6 @@ visit
 </a>
 
 ## Features
-- View detailed information about each game, including description, price, and system requirements.
 - Add items to your cart and buy at anytime.
 - Securely purchase games using Stripe integration for seamless payment processing.
 - A user-friendly and responsive interface built using modern web technologies.
