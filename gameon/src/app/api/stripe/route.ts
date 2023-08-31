@@ -13,16 +13,18 @@ import { Game, GameSubset } from '@/models/game';
 export async function POST(req: Request, res: Response) {
 	const { cartItems, userEmail } = await req.json();
 	const origin = req.headers.get('origin');
-    console.log("here")
-    console.log(origin)
+    // console.log("here")
+    // console.log(origin)
     // console.log(parseInt((item.price * 100).toString()))
 	const updatedItems: GameSubset[] =
 		(await fetchAndCalculateItemPricesAndQuantity(cartItems)) as GameSubset[];
     console.log(updatedItems)
 	try {
+		console.log("before sesson")
 		const session = await stripe.checkout.sessions.create({
 			line_items: updatedItems.map(item => {
-                console.log((item.price * 100).toString())
+                // console.log((item.price * 100).toString())
+				// console.log(item.quantity,item.maxQuantity,item.name,item.image[0].url, parseInt((item.price * 100).toString()))
                 return ({
 				quantity: item.quantity,
 				adjustable_quantity: {
@@ -45,7 +47,7 @@ export async function POST(req: Request, res: Response) {
 			success_url: `${origin}/?success=true`,
 			phone_number_collection: { enabled: true },
 		});
-
+		console.log("after session")
 		await updateGameQuantity(updatedItems);
 
 		await createOrder(updatedItems, userEmail);
@@ -66,7 +68,7 @@ async function fetchAndCalculateItemPricesAndQuantity(cartItems: Game[]) {
         name,
         price,
         quantity,
-        images
+        image
     }`;
 
 	try {

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import footerClassNames from "./footerClassNames";
-
+import Image from "next/image";
+import headerlogo from "../../../public/images/GameOnLogo2.png"
 const Footer = () => {
     const {
         container,
@@ -23,7 +24,15 @@ const Footer = () => {
         <div className={container}>
             <div className={section}>
                 <div className={section1}>
-                    <h2 className={section1Heading}>LOGO</h2>
+                    <h2 className={section1Heading}>
+                    <Image
+           src={headerlogo}
+           alt="Logo"
+           height={45}
+          
+        
+          />
+                    </h2>
                     <p className={section1Content}>
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae ad vero quis et officiis, ipsam dolorum aut aperiam magni laboriosam consectetur magnam, iste necessitatibus cumque? Laudantium nostrum eveniet ullam quasi. 
                     </p>

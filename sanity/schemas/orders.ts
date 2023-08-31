@@ -6,8 +6,6 @@ export default {
     title: 'Order',
     fields: [
       {name: 'userEmail', title: 'User Email', type: 'string'},
-      {name:'phoneNumber',tittle:'Pnone Number', type: 'string'},
-      {name: 'shippingAddress',title:"Shipping Address", type:'string'},
       {
         name: 'items',
         title: 'Items',
@@ -27,7 +25,6 @@ export default {
           },
         ],
       },
-      {name:'totalPrice', title:'Total Price', type:'number'},
       {
         name: 'orderStatus',
         title: 'Order Status',
