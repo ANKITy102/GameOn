@@ -35,6 +35,13 @@ const Header = () => {
   const toggleForm =() =>{
     setIsSignupForm((prev)=>!prev)
   }
+	const { status, data: session } = useSession({
+		required: true,
+		onUnauthenticated() {
+			// handle user not authenticated
+		},
+	});
+  // console.log(status,session)
   const signinHandler = async () => {
 		try {
 			await signIn();
@@ -70,26 +77,34 @@ const Header = () => {
             </button>
           </li>
           <li className="flex items-center justify-center h-7 ">
-            <Link href="/orders" className={orders}>
-              Orders
-            </Link>
-            <button className={logoutBtn}>
-              Logout
-            </button>
-            <button className={signupBtn} onClick={toggleForm} >Sign Up</button>
-            <button className={signinBtn}
-              onClick={signinHandler}
-            >
-              Sign In
-              <FcGoogle
-                style={{
-                  fontSize: "25px",
-                  cursor: "pointer",
-                  marginLeft: "12px",
-                }}
-                className={link}
-              />
-            </button>
+          {session?.user && (
+									<>
+										<Link href='/orders' className={orders}>
+											Orders
+										</Link>
+										<button onClick={() => signOut()} className={logoutBtn}>
+											Logout
+										</button>
+									</>
+								)}
+								{!session?.user && (
+									<>
+										<button onClick={toggleForm} className={signupBtn}>
+											Sign Up
+										</button>
+										<button onClick={signinHandler} className={signinBtn}>
+											Sign In
+											<FcGoogle
+												style={{
+													fontSize: '25px',
+													cursor: 'pointer',
+													marginLeft: '12px',
+												}}
+												className={link}
+											/>
+										</button>
+									</>
+								)}
           </li>
         </ul>
       </nav>

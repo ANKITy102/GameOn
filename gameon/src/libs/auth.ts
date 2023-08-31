@@ -7,7 +7,7 @@ import { MongoClient } from "mongodb"
 export const authOptions:NextAuthOptions = {
     providers: [
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENTID as string,
+            clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
         }),
         CredentailsProvider({

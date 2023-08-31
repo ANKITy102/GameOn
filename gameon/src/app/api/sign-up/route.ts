@@ -26,7 +26,7 @@ export async function POST(req: Request, res: Response) {
         statusText: 'Sign up success'
     })
   } catch (error) {
-    console.log("Registration Failed", error);
+    // console.log("Registration Failed", error);
     return new NextResponse("Registration Error", {status:500});
   }
 }
