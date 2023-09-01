@@ -71,12 +71,12 @@ const Header = () => {
         <ul className={ul}>
           <li>
             <button onClick={()=>dispatch(toggleCart())} className={link2}>
-              <span>
+              <div className="md:flex block md:items-center">
                 <span className="md:block hidden">
                 Cart
                 </span>
                  <AiOutlineShoppingCart className="inline-block text-3xl" />
-              </span>
+              </div>
               <div className={cart}>{totalQuantity}</div>
             </button>
           </li>
